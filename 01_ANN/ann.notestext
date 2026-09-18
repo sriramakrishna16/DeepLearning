@@ -1,0 +1,95 @@
+ANN stands for Artificial Neural Network
+    An Artificial Neural Network (ANN) is a machine learning model inspired by the structure of 
+    biological neurons, consisting of interconnected layers of neurons that learn patterns from data by 
+    adjusting weights and biases through forward propagation and backpropagation.
+
+Artificial Neural Network is inspired from Biological neurons. and it consists of three layers:
+    1) Input layer.
+    2) Hidden layer
+    3) Output layer
+
+Input layer : 
+    Receives the input features.
+    Number of feature columns = Number of input features
+
+Hidden layer:
+    Processes the inputs
+    learns patterns and reresentations
+
+    An ANN can have one or many hidden layers.
+    Hidden layers number is hyperparameter.
+Output layer:
+    predicts the output
+
+    Number of neurons on output layer depends on the problem we are solving.
+    like regression or classfication.
+
+    for regression - only one neuron on output
+    for classification - binary types(0/1 or yes/no)- one neuron
+                        - multi classification - two or more neurons
+
+information in each input passes to all hidden neurons and all hidden neuron
+outputs are connected to output layers. This connection is knowns as dense connection.
+
+Neuron : 
+    Neuron can be divided into two parts
+    one part can perform Math operation, another part can perform activation.
+
+    this structure can be in all neurons except input neurons.
+
+Weights : 
+    Every connection can be carrying the weightage. Meanwhile passing information from 
+    input to hidden state, it also carries the importance of the input value through the 
+    connection  is known as weights.
+
+    weights are assigned randomly.
+
+Activations:
+    Activations are used to extract the non linear relationships (each neuron extracts the complete inform
+    and sends to another neuron that is both linear and non linear relationships)
+
+    some of the important activations are :
+        -ReLU
+        -TanH
+        -Sigmoid
+        -Softmax
+
+    activations are used in hidden and output layers
+
+    Hidden - ReLU, Tanh
+
+    output - Sigmoid, Softmax
+
+ReLU(Rectified Linear Unit)
+
+relu performs on neuron where the input is travelled from math operation the output 
+becomes 0 if x is negative 
+keeps as it is if x is positive 
+
+for regression , no activation is used in output layer
+for classification, sigmoid and softmax functions are used.
+
+the input is successfully passed through hidden layers and produced at output layer
+this process is known as forward propagation.
+
+so we use backward propagation to reduce the errors.
+
+Backward propagation:
+    is performed to reduce errors by updating weights - using derivatives
+
+    d/d(w) (error) if weight decrease , we observe that error is reducing or not.
+
+it does several iterations both forward and backward until the error minimizes close to 
+the zero.
+
+There is a problem while updating weights that is vanishing gradient problem ,
+if we keep updating the weights by minimizing , some weights become zero,
+then the neuron stops passing information to other neurons
+
+if the weights are increasing gradually in multiple iterations , particular neuron weight becomes
+too large then the whole prediction depends on that feature 
+this is known as exploiding gradient.
+
+to reduce these types of problems we use batch normalisation. that is normalisation means we scale
+the values in same range like -1 to 1. and batch normalisation we apply on weights instead of features
+that helps in preventing the both vanishing and exploidig gradient problems.
