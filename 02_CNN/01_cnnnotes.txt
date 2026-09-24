@@ -1,0 +1,177 @@
+Convoltional Neural Network:
+    CNN is a neural network that uses convolution operations to automatically extract spatial 
+    features from data, especially images, and then uses those features for tasks such as 
+    classification or detection.
+
+Basic CNN flow:
+Image → Convolution → Activation (ReLU) → Pooling → Fully Connected Layer → Output
+
+It uses convolutional layers , which apply learnable filters to detect important features
+like edges , textures, shapes and objects, making it highly effective for visula and pattern
+recognition tasks.
+
+There are three layers in CNN:
+    1) Convolutional layer(extracts the important features)
+    2) Pooling layer
+    3) Fully connected layer(ANN)
+
+There are several different architectures in CNN like VGG16
+
+why CNN's are introduced while ANN can also capable of doing these tasks...?
+problems with ANN:
+    1) High computational cost
+    2) Overfitting
+    3) Loss of spacial features
+
+for example , if there is 50 x 50 pixel image mean 50 x 50 matrix
+and if we want to train this image to model , each row has 50 values 
+so for each each row 50 , and all rows 50 , then there are 50 x 50 = 2,500 values
+and we are assuming there are 100 hidden units , and each connection has a corresponding weights
+
+so there are 2,500 x 100 = 2,50,000 weights 
+and if there is another 50 hidden layer unit then 2,50,000 + 50 hidden unit weights
+
+then the computation becomes heavy(high amount of memory and gpu is needed)
+
+we are concentrating on each and every pixel of the data including noise which 
+    results in overfitting.
+
+a pixel has a neighboring relationship with another pixel. and arrangement of 
+these pixels makes the shape
+
+but in ANN , we flatten these values into 1D shape, so the spatial features and 
+relations between pixels is not explicitly preserved.
+
+in convolutional layer we extract the primitive features like tiny edges, shapes
+for example in image 6 -> `, ', .... like shapes
+
+and in next convulation layer we merge the primitive features like ` + ' 
+
+and in next convolutional layer , again merges and converts into some bigger features
+    know as complex features.
+
+during testing testing , in same why features are extracted and predicts the 
+    corresponding matching value.
+
+Applications:
+ 1) Image classification
+ 2) Object detection(Identifying what and where objects are in image):
+            self driving cars, CCTV survilliance, Industrial automation
+ 3) Image segmentation(dividing image into meaningfull regions)
+ 4) Medical image analysis
+ 5) Self driving cars
+ 6) Facial recognition
+ 7) Emotion & expression recognition
+ 8) Optical character recognition(OCR)
+
+there are two types of images :
+    1) grey scale
+    2) RGB
+
+Grey scale has intensity range from 0 to 255 where o is pure black and 255 is white
+and between values are dark grey and light grey based on intensity direction.
+
+in RGB -> Red {255, 0 , 0} Green{0, 255, 0} Blue{0, 0 , 255}
+
+working of convolutional layer:
+    image -> kernel -> pooling -> fully connected layer
+
+    image pixels are represented in matrix and uses kernel or filter to detect features
+    by doing dot product and then applies activation functions.
+    and then we apply pooling techniques like max pool or avg pool to detect important features
+    and passed to fully connected layers to learn and update values
+
+    edges in images : change in intensity values
+    example : seperates the color intensity in images 
+
+there are several types of filter , some of they are:
+    1) edge filter -> Sobel vertical, sobel horizontal
+    2) blur filters -> smooth and remove noise (avg blur, guassion blur)
+    3) sharpen filters
+    4) High pass filter (stops low intensity details, and pass high intensity) 
+    5) Low pass filter 
+
+why paddig is required?
+    there may be feature map size can be reduced compared to input size and then 
+    in futher processes, feature map will be more reduced result in loss of information
+
+    for example -> 4 x 4 image -> 3 x 3 filter -> 2x2 feature map
+    n - m + 1 = 4 - 3 + 1 = 2
+
+    to avoid this we add padding and another reason is when we do dot product 
+    middle information is more involved compared to border information.
+
+    to solve these problems , we use padding
+
+*** padding adds zero values as extra layer to images 
+    after applying padding image size = feature map size.
+
+    p = m - 1/2 here m is size of the filter
+    
+*** stride :
+    Stride is the number of pixels by which the kernel moves across the image 
+    at each step during convolution.
+
+increasing stride value always decreases the feature map size
+
+*** why pooling and what is pooling?
+Pooling solves memory issue
+    adding several filters results in increasing number of layers or depth in
+    output layer
+
+    for example , 32 x 32 x 3 -> 16 filter -> then it has -> 32 x 32 x 16
+    each filter has 32 x 32 pixel values
+
+    its heavy to store feature maps
+
+    to prevent this, pooling is introduced?
+
+pooling solves translation variance..
+    if we train a CNN model with image of cat positioned left side on image
+    and another image with same cat positioned right side of the image
+
+    then model have different feature maps for same images...
+
+    then the model is location dependent instead of feature dependent
+
+how pooling solves these two issues..?
+    Pooling is a downsampling operation in CNNs that reduces the spatial size (height and width) 
+    of feature maps while keeping the important features.
+
+in pooling , we have to define the windows size
+                                    stride
+                                    type of pooling(min, max, avg, stochastic)
+    
+so by doing pooling , we downsample the 4x4 feature map -> 2x2 mean we pack the important
+    features close together result in feature dependent instead of location dependent
+    simple by pooling we are making translation invariance instead of translation variance.
+
+Global max pooling : use in final layers. instead of using filter , it reduces the entire 
+map into single value , same for global max, min or avg pooling
+
+Stochastic pooling : without any criteria , it selects random value
+
+L2 pooling : known as RMS pooling, it offers a balance between max and average pooling
+            calcuates square root of sum of squares of the values
+
+after pooling , flatten the input into 1D and given to fully connected layer.
+
+Advantages of pooling :
+    Translation invaraince
+    reduced size
+    Enhanced features
+    No trainable parameters , means faster
+
+Disadvantages:
+    Self driving cars(multiple cars are considered as same car , pooling doesnt works here)
+    Image segmentation(where location matters, we avoid pooling)
+    Loss of information(reduced and important features only)
+
+
+ 
+
+
+
+
+
+
