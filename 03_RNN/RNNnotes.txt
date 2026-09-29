@@ -1,0 +1,103 @@
+Problems with ANN:
+    Non sequentail data is used in ANN, order of data doesnt matter and model doesnt effected
+    ex : physics|Maths|Science as inputs order doesnt matter
+
+when it comes to sequential data : order matters
+    ex : text data
+        time series data like stock prices, temperature
+        speech , or audio
+
+ANN doesnt remember the previous info , even if we pass data in order
+    ANN combines all the data in parallel and thinks its entire information instead 
+    of sequential data.
+
+and another problem is , in sequential data , input sequence is changing, but in ANN
+    sequence is constant.
+    ex : i love ai and i donk know about ai 
+    here input one has 3 words and input 2 has 5 words
+    max is 5 , we have to use 5 input neurons
+
+    and for input 1 -> 3 neurons are enough , and we use padding for the remaining two 
+        unwanted neurons
+    
+    padding solution works but not efficient 
+
+and another major problem is , for datasets with lower vocabulary size is ok to handle,
+    but with large vocabulary size like 10,000 
+    representing each word in vectors req input size is 10,000 like ai -> [1,0,0,0,...] in OHE
+
+    very large and needs high computational cost
+
+SO we use RNN instead of ANN for sequential data
+
+RNN — Recurrent Neural Network
+
+An RNN (Recurrent Neural Network) is a type of neural network designed to work with sequential data,
+     where the order of the data matters.
+
+An RNN uses the previous step's information when processing the current step.
+
+Application : early NLP tasks (now using transformers)
+            Machine Translation
+            Sentiment Analysis
+            Chatbots and Question anwsering systems
+            Speech recognition and audi processing
+
+example sequence input - i love ai
+   and input size is 5 (mean 5 unique words) and all data 
+
+   now its represented as batch size, sequence length, i/p size
+        (3,3,5)
+
+    now for 1st sequnece i love ai
+
+    at timestamp t = 1
+    I is processed though input layer neurons
+
+    in hidden layer output is feed forwarded back to input as to all neurons
+     in same hidden unit
+
+    and now at t = 2
+
+    Love is processed though input layer by adding with previous output
+        and again output is forwarded back as input
+
+    at t = 3, ai is processed so t= 3, it contains all the information
+
+    entire loop is known as recurrent loop or forward loop
+
+    so h3 , hidden layer value 3 is processed forward to next layer
+        and output is calculated at output layer.
+
+so, At each time step, an RNN receives two things:
+    Current input
+    Previous hidden state(intially random or zeroes)
+
+Math : input x11 x12 x13 in one sequnece(3,3,5)
+
+    x11 -> (weights) -> HS -> h1
+                        |ui
+                        h0
+
+    x12 -> (weights) -> HS(h1)(ui) -> h2
+
+    x13 -> (weights) -> HS(h2)(ui) -> h3
+
+    and sequence is completed and h3 is processed forward for output
+
+    h = activation(xiwi + hiui + b)
+
+    at output o = sigmoid(h3w3+b)
+
+    for this example , 5 ip neurons to 3 hidden neurond to one output neuron
+    total parameters for this example - 5 input * 3 hl = 15
+                                    - each hidden unit (loops) - 3 * 3 = 9
+                                    - 3 bias for 3 hiddent neurons
+                                    - 3 weights for output
+                                    - and 1 bias
+
+    total 31 parameters for this simple model
+
+
+
+
