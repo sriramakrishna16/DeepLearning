@@ -1,0 +1,48 @@
+Problems With Recurrent Neural Networks
+    1) Problem of long term dependency
+    2) Stragnated training
+
+Example : i went to delhi. i love the food. i love the places.
+            Among all of them , i love the RedFort
+
+1) problem of long term dependency
+RNN works well with short sequences but fails capturing long term sequences.
+    rnn fails to understand where RedFort belongs to..
+
+2) Stagnated training(learning stops while backpropagating through time)
+RNN works well with long term data but fails capturing the earlier information
+
+while updating wi and wh weights , we have to calculate the gradients in backpropagation
+
+gradient formula : dowL/dowy * dow y/dow h3 * dow h3/dow w + dowL/dowy * dow y/dow h3 * dow h3/ dow h2 * dow h2/ dow w
+    +.......
+
+    so gradient multiplication increases for earlier information when backpropagating from end
+    we use tanh mean -1 to 1 so when gradients increases , multiplying less than 1 values 
+    multiple times makes particular information value become very small or erase
+
+    so the recent or ending information carried by RNN but earlier starting information is erased.
+
+    this is called vanishing gradient problem
+
+    so i love red fort information stays but i went to delhi is erased
+
+possible solutions to overcome VGP:
+    1) ReLU
+    2) LSTM
+
+when using ReLU , max(0, x)
+    values becomes very high when no of terms or gradients increases
+    usually starting terms has more gradients so the value increases more
+    and recent or end information becomes very less or erased.
+
+    this problem is known as Exploding gradient problem
+
+    possible solutions are :
+        1) Gradient clipping (use threshold to stop gradients becoming very large)
+        2) Use LSTM's
+
+
+
+
+
