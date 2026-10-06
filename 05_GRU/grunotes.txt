@@ -1,0 +1,63 @@
+GRU — Definition
+
+GRU (Gated Recurrent Unit) is a type of Recurrent Neural Network (RNN) architecture designed to handle 
+long-term dependencies in sequential data while reducing the vanishing-gradient problem.
+
+GRU has two gates:
+    Update Gate → decides how much past information to keep
+    Reset Gate → decides how much past information to forget
+
+Reset gate : sigmoid(WrXt + Urht-1 + br) -> U stands for weight 
+
+update gate : zt = sigmoid(WzXt + Uzht-1 + bz)
+
+Candidate hidden state : Ht ​= tanh(Wh​xt​+Uh​(rt​ X ht−1​)+bh​)​ -> new information
+
+final hidden state : ht = ((1-zt) x ht-1) + (zt X Ht)
+
+Relationship with zt
+
+when zt = 0 , old information has high importance, new info low importance
+when zt = 0.5 , equal importance, equal importance
+when zt = 1, low importance, high importance
+
+
+example:
+GRU Final Formula:
+
+hₜ = (1 - zₜ) × hₜ₋₁ + zₜ × h̃ₜ
+
+Where:
+hₜ₋₁ = previous hidden state (old information)
+h̃ₜ  = candidate hidden state (new information)
+zₜ   = update gate
+
+
+Example 1:
+zₜ = 0.8
+
+hₜ = (1 - 0.8)hₜ₋₁ + 0.8h̃ₜ
+   = 0.2hₜ₋₁ + 0.8h̃ₜ
+
+→ 20% old information
+→ 80% new information
+
+So, high zₜ → more new information.
+
+
+Example 2:
+zₜ = 0.2
+
+hₜ = (1 - 0.2)hₜ₋₁ + 0.2h̃ₜ
+   = 0.8hₜ₋₁ + 0.2h̃ₜ
+
+→ 80% old information
+→ 20% new information
+
+So, low zₜ → more old information.
+
+
+Key relation:
+
+High zₜ → New information ↑, Old information ↓
+Low zₜ  → New information ↓, Old information ↑
